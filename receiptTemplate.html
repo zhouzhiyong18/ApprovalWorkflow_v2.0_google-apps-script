@@ -1,0 +1,39 @@
+<h1>
+   This is your application information.
+</h1>
+
+<h3>
+   Form Title :   <?= formTitle ?>
+</h3>
+
+<h3>
+   Request ID :   <?= requestId ?>
+</h3>
+
+<h3>
+   You can <a href="<?= doGetUrl ?>">click here</a> to check the latest state of your application. 
+</h3>
+
+<br>
+
+<h3>
+   Application Content:
+</h3>
+
+<table border="1">
+  <? for (var i = 0; i < itemResponses.length; i++) { ?>
+    <tr>
+        <th align="left"><?= itemResponses[i].getItem().getTitle() ?></th>
+        <? 
+        if(itemResponses[i].getItem().getType()=="FILE_UPLOAD"){ 
+          var url = "https://drive.google.com/open?id=" + itemResponses[i].getResponse(); 
+          var ans = "<a href='" + url + "'>File Link</a>"
+        }
+        else {
+          var ans = itemResponses[i].getResponse();
+        } 
+        ?>
+        <td><?!= ans ?></td>
+    </tr>
+  <? } ?>
+</table>
