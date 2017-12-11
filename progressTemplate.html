@@ -1,0 +1,42 @@
+<p>Hello,</p>
+
+<p>
+   <?= approver ?> has reviewed your request, This is the step <?= status ?>.
+</p>
+
+<p>
+   Dicision : <b style="color:green"><?= dicision_App ?></b><b style="color:red"><?= dicision_Rej ?></b>
+</p>
+
+<p>
+   Comment : <b><?= comment ?></b>
+</p>
+
+<p>
+   You can <a href="<?= doGetUrl ?>">click here</a> to check the latest state of your application. 
+</p>
+
+<br>
+
+<h3>
+   Application Content:
+</h3>
+
+<table border="1">
+  <? for (var i = 0; i < itemResponses.length; i++) { ?>
+    <tr>
+        <th align="left"><?= itemResponses[i].getItem().getTitle() ?></th>
+        <? 
+        if(itemResponses[i].getItem().getType()=="FILE_UPLOAD"){ 
+          var url = "https://drive.google.com/open?id=" + itemResponses[i].getResponse(); 
+          var ans = "<a href='" + url + "'>File Link</a>"
+        }
+        else {
+          var ans = itemResponses[i].getResponse();
+        } 
+        ?>
+        <td><?!= ans ?></td>
+    </tr>
+  <? } ?>
+</table>
+
