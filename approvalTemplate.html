@@ -1,0 +1,57 @@
+<h3>Hello,</h3>
+
+<h3>
+  This application form needs your approval.
+</h3>
+
+<br>
+
+<h3>
+  Form Title :   <?= formTitle ?>
+</h3>
+
+<h3>
+  Applicant :   <?= applicant ?>
+</h3>
+
+<h3>
+  Request ID :   <?= requestId ?>
+</h3>
+
+<table border="1">
+  <? for (var i = 0; i < itemResponses.length; i++) { ?>
+    <tr>
+        <th align="left"><?= itemResponses[i].getItem().getTitle() ?></th>
+        <? 
+        if(itemResponses[i].getItem().getType()=="FILE_UPLOAD"){ 
+          var url = "https://drive.google.com/open?id=" + itemResponses[i].getResponse(); 
+          var ans = "<a href='" + url + "'>File Link</a>"
+        }
+        else {
+          var ans = itemResponses[i].getResponse();
+        } 
+        ?>
+        <td><?!= ans ?></td>
+    </tr>
+  <? } ?>
+</table>
+
+<br>
+
+<form action="<?= sever_doPost ?>" method="POST">
+  <input type="hidden" name="formId" value="<?= formId ?>">
+  <input type="hidden" name="responseId" value="<?= responseId ?>">
+  <input type="hidden" name="rowIndex" value="<?= rowIndex ?>">
+  <input type="hidden" name="requestId" value="<?= requestId ?>">
+  <input type="hidden" name="status" value="<?= status ?>">
+  
+  <input type="radio" name="dicision" id="approve" value="Approve" checked><label for="approve">Approve</label>
+  &nbsp;&nbsp;
+  <input type="radio" name="dicision" id="reject" value="Reject"><label for="reject">Reject</label>
+  <br>
+  <br>
+  Comment:<br>
+  <textarea rows="3" cols="40" name="comment"></textarea>
+  <br><br>
+  <input type="submit" value="Submit">
+</form>
