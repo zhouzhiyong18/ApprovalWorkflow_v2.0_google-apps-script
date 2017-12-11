@@ -1,0 +1,63 @@
+<h1>
+   The application has been approved!
+</h1>
+
+<h2>
+   Form Title :   <?= formTitle ?>
+</h2>
+
+<h2>
+   Request ID :   <?= requestId ?>
+</h2>
+
+<br>
+
+<h3>
+   Application Content:
+</h3>
+
+<table border="1">
+  <? for (var i = 0; i < itemResponses.length; i++) { ?>
+    <tr>
+        <th align="left"><?= itemResponses[i].getItem().getTitle() ?></th>
+        <? 
+        if(itemResponses[i].getItem().getType()=="FILE_UPLOAD"){ 
+          var url = "https://drive.google.com/open?id=" + itemResponses[i].getResponse(); 
+          var ans = "<a href='" + url + "'>File Link</a>"
+        }
+        else {
+          var ans = itemResponses[i].getResponse();
+        } 
+        ?>
+        <td><?!= ans ?></td>
+    </tr>
+  <? } ?>
+</table>
+
+<br>
+
+<h3>
+   Approval Information:
+</h3>
+
+<table border="1">
+  <tr>
+    <th>No.</th>
+    <th>Approver</th>
+    <th>Dicision</th> 
+    <th>Comment</th> 
+    <th>Date</th> 
+    <th>Approver Role</th> 
+  </tr>
+  <? for (var i = 0; i < status; i++) { ?>
+  <tr>
+    <td><?= i+1 ?></td>
+    <td><?= approvalInfo[0][0+4*i] ?></td>
+    <td><?= approvalInfo[0][1+4*i] ?></td> 
+    <td><?= approvalInfo[0][2+4*i] ?></td> 
+    <td><?= approvalInfo[0][3+4*i] ?></td> 
+    <td><?= approvalRole[0][i] ?></td> 
+  </tr>
+  <? } ?>
+</table>
+
